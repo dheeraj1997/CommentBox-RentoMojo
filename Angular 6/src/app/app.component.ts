@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from './shared/user.service';
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +6,5 @@ import { Router } from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  userDetails;
-  constructor(private userService: UserService, private router: Router) { }
-
-  onLogout(){
-    this.userService.deleteToken();
-    this.router.navigate(['/']);
-  }
+  title = 'app';
 }
