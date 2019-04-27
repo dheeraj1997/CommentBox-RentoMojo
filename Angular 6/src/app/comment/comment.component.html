@@ -5,12 +5,18 @@
         <div class="card-block">
           <form class="form-inline pl-5 pr-5 pt-4" (submit)="onComment()">
             <!--            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea form-control" [(ngModel)]="comment" name="comment" ></textarea>-->
-            <textarea type="text" class="form-control pb-cmnt-textarea col-md-12 col-sm-12 col-lg-12 col-xs-12" placeholder="Enter Comment" [(ngModel)]="comment" name="comment"></textarea>
+            <textarea type="text" class="form-control pb-cmnt-textarea col-md-12 col-sm-12 col-lg-12 col-xs-12" placeholder="Type a Comment..." [(ngModel)]="comment" name="comment"></textarea>
             <div class="mt-1 mb-2" style="">
               <button class="btn btn-danger" type="submit">Post Comment</button>
+            </div>
+            <!-- Error message -->
+            <div *ngIf="serverErrorMessages" [ngClass]=" success ? 'alert success ml-3 p-2 mt-2':'alert ml-3 p-2 mt-2'">
+              {{serverErrorMessages}}
             </div>
           </form>
         </div>
       </div>
-
     </div>
+  </div>
+</div>
+
