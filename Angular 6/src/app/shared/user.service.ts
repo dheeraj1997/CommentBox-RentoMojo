@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
+import { CommentModel } from "./comment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,12 @@ export class UserService {
     email: '',
     password: ''
   };
+  comment: CommentModel = {
+    text: '',
+    author:{},
+    upvote: [''],
+    downvote: ['']
+  };
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
@@ -22,6 +29,18 @@ export class UserService {
 
   postUser(user: User){
     return this.http.post(environment.apiBaseUrl+'/register',user,this.noAuthHeader);
+  }
+
+  postComment(data){
+    var com = new CommentModel();
+    com.author = data.author;
+    com.text = data.com;
+    console.log("sevce comment",com);
+    return this.http.post(environment.apiBaseUrl+'/comment',com);
+  }
+
+  getComment(){
+    return this.http.get(environment.apiBaseUrl + '/comment');
   }
 
   login(authCredentials) {
