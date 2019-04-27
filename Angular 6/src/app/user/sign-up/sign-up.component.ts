@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from "@angular/router";
 
 import { UserService } from '../../shared/user.service'
 
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
   showSucessMessage: boolean;
   serverErrorMessages: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private router : Router) { }
 
   ngOnInit() {
   }
@@ -22,7 +23,10 @@ export class SignUpComponent implements OnInit {
     this.userService.postUser(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
-        setTimeout(() => this.showSucessMessage = false, 4000);
+        setTimeout(() => {
+          this.showSucessMessage = false;
+          this.router.navigateByUrl('/');
+          }, 2000);
         this.resetForm(form);
       },
       err => {
