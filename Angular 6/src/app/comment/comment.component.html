@@ -1,6 +1,6 @@
 <div class="container pb-cmnt-container">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 col-sm-12 col-xs-12 offset-md-3">
       <div class="card card-info ">
         <div class="card-block">
           <form class="form-inline pl-5 pr-5 pt-4" (submit)="onComment()">
@@ -9,10 +9,7 @@
             <div class="mt-1 mb-2" style="">
               <button class="btn btn-danger" type="submit">Post Comment</button>
             </div>
-            <!-- Error message -->
-            <div *ngIf="serverErrorMessages" [ngClass]=" success ? 'alert success ml-3 p-2 mt-2':'alert ml-3 p-2 mt-2'">
-              {{serverErrorMessages}}
-            </div>
+
           </form>
 
           <!--        posted comments -->
@@ -26,10 +23,10 @@
                   </div>
                   <div class="col-md-4">
                     <button type="submit" class="btn btn-link" style="height: 20px;color: green" (click)="upvote(comment)">
-                      <img src="../../assets/img/like.png" alt="" style="height: 20px;"> {{comment.upvote.length}} upvote
+                      <img src="../../assets/img/like.png" alt="" style="height: 20px;"> {{comment.upvote.length}} upvotes
                     </button>
                     <button type="submit" class="btn btn-link" style="height: 20px; color: red" (click)="downvote(comment)">
-                      <img src="../../assets/img/dislike.png" alt="" style="height: 20px;"> {{comment.downvote.length}} downvote
+                      <img src="../../assets/img/dislike.png" alt="" style="height: 20px;"> {{comment.downvote.length}} downvotes
                     </button>
                     <br>
                   </div>
@@ -43,6 +40,11 @@
         </div>
       </div>
     </div>
+    <!-- Error message -->
+    <div *ngIf="serverErrorMessages" [ngClass]=" success ? 'alert success':'alert col-md-3'" style="height: 70px;">
+      {{serverErrorMessages}}
+    </div>
+
   </div>
 </div>
 
