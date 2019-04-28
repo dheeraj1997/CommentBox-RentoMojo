@@ -14,6 +14,32 @@
               {{serverErrorMessages}}
             </div>
           </form>
+
+          <!--        posted comments -->
+          <div class="row" >
+            <div class="col-md-12" *ngFor="let comment of commentData; let i = index">
+              <div class="card-block">
+                <div class="row" style="padding-left: 3vw;color: grey;">
+                  <div class="col-md-8" >
+                    <b>{{i+1}}.&nbsp; &nbsp;{{comment.author.fullName}}</b> <br>
+                    <p class="pl-4">{{comment.text}}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="submit" class="btn btn-link" style="height: 20px;color: green" (click)="upvote(comment)">
+                      <img src="../../assets/img/like.png" alt="" style="height: 20px;"> {{comment.upvote.length}} upvote
+                    </button>
+                    <button type="submit" class="btn btn-link" style="height: 20px; color: red" (click)="downvote(comment)">
+                      <img src="../../assets/img/dislike.png" alt="" style="height: 20px;"> {{comment.downvote.length}} downvote
+                    </button>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>

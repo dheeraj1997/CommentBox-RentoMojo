@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import 'rxjs-compat/add/operator/map';
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
 import { CommentModel } from "./comment.model";
@@ -29,18 +29,6 @@ export class UserService {
 
   postUser(user: User){
     return this.http.post(environment.apiBaseUrl+'/register',user,this.noAuthHeader);
-  }
-
-  postComment(data){
-    var com = new CommentModel();
-    com.author = data.author;
-    com.text = data.com;
-    console.log("sevce comment",com);
-    return this.http.post(environment.apiBaseUrl+'/comment',com);
-  }
-
-  getComment(){
-    return this.http.get(environment.apiBaseUrl + '/comment');
   }
 
   login(authCredentials) {
@@ -82,5 +70,35 @@ export class UserService {
       return userPayload.exp > Date.now() / 1000;
     else
       return false;
+  }
+
+  // Comment methods
+
+  postComment(data){
+    var com = new CommentModel();
+    com.author = data.author;
+    com.text = data.com;
+    console.log("sevce comment",com);
+    return this.http.post(environment.apiBaseUrl+'/comment',com);
+  }
+
+  getComment(){
+    return this.http.get(environment.apiBaseUrl + '/comment');
+  }
+
+  upvoteComment(com,userId){
+    console.log("printing userid ",userId);
+    console.log("printing commentid ",com._id);
+    return this.http.put(environment.apiBaseUrl + '/upvote/'+com._id,{id:userId}).map(res => res);
+  }
+
+  downvoteComment(com,userId){
+    console.log("printing userid ",userId);
+    console.log("printing commentid ",com._id);
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    // var downvoteurl='http://localhost:3000/comments/downvote/'+comid;
+    return this.http.put(environment.apiBaseUrl + '/downvote/'+com._id,{id:userId}, {headers: headers})
+      .map(res => res);
   }
 }
