@@ -87,18 +87,15 @@ export class UserService {
   }
 
   upvoteComment(com,userId){
-    console.log("printing userid ",userId);
-    console.log("printing commentid ",com._id);
+    console.log("upvote userid ",userId);
+    console.log("upvote commentid ",com._id);
     return this.http.put(environment.apiBaseUrl + '/upvote/'+com._id,{id:userId}).map(res => res);
   }
 
   downvoteComment(com,userId){
-    console.log("printing userid ",userId);
-    console.log("printing commentid ",com._id);
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    // var downvoteurl='http://localhost:3000/comments/downvote/'+comid;
-    return this.http.put(environment.apiBaseUrl + '/downvote/'+com._id,{id:userId}, {headers: headers})
+    console.log("downvote userid ",userId);
+    console.log("downvote commentid ",com._id);
+    return this.http.put(environment.apiBaseUrl + '/downvote/'+com._id,{id:userId})
       .map(res => res);
   }
 }

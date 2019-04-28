@@ -60,14 +60,10 @@ export class CommentComponent implements OnInit {
       setTimeout(() => {
         this.serverErrorMessages = '';
       }, 2000);
-      var com = this.comment;
-      var author_id = localStorage.getItem('id');
-      var author_name = this.userDetails['fullname'];
-      var dat = {com:com,author:this.userDetails};
+      var dat = {com:this.comment,author:this.userDetails};
       this.comment = '';
       this.userService.postComment(dat).subscribe(data => {
         console.log("comment posted ", data);
-        console.log("com",com);
         this.commentData.push(data);
       })
     }
@@ -76,29 +72,23 @@ export class CommentComponent implements OnInit {
   upvote(comment){
     console.log("upvote clicked",comment);
     if(!this.userService.isLoggedIn()){
-      // this.flashMessage.show('Please Login ', {cssClass: 'alert-danger ', timeout: 2000});
       this.router.navigate(['/login']);
     }
     else{
       console.log("upvote clicked2");
       var userId = this.userDetails._id;
       if(comment.author._id == userId){
-        // this.flashMessage.show('You cant upvote your own comment', {cssClass: 'alert-warning position-fixed', timeout: 2000});
         console.log('cant upvote own comment');
         this.success = false;
         this.serverErrorMessages = 'Can\'t upvote own comment';
       }
       else if(comment.downvote.includes(userId)){
         console.log("downvotes contain already ");
-        // this.flashMessage.show('You have already downvoted', {cssClass: 'alert-warning position-fixed', timeout: 2000});
-        // doc.upvote.push(user_id);
         this.success = false;
         this.serverErrorMessages = 'You have already downvoted';
       }
       else if(comment.upvote.includes(userId)){
         console.log("upvotes contain already ");
-        // this.flashMessage.show('You have already upvoted ', {cssClass: 'alert-warning position-fixed', timeout: 2000});
-        // doc.upvote.push(user_id);
         this.success = false;
         this.serverErrorMessages = 'You have already upvoted';
       }
@@ -108,8 +98,6 @@ export class CommentComponent implements OnInit {
           comment.upvote.push(userId);
           this.success = true;
           this.serverErrorMessages = 'Comment upvoted successfully';
-          // this.flashMessage.show('Comment upvoted successfully ', {cssClass: 'alert-success position-fixed', timeout: 2000});
-          //this.router.navigate(['/']);
         })
       }
 
@@ -119,7 +107,6 @@ export class CommentComponent implements OnInit {
   downvote(comment){
     console.log("downvote clicked",comment);
     if(!this.userService.isLoggedIn()){
-      // this.flashMessage.show('Please Login ', {cssClass: 'alert-danger', timeout: 2000});
       this.router.navigate(['/login']);
     }
     else{
@@ -129,22 +116,16 @@ export class CommentComponent implements OnInit {
         console.log("You cant downvote your own comment");
         this.success = false;
         this.serverErrorMessages = 'Can\'t downvote own comment';
-        // this.flashMessage.show('You cant downvote your own comment', {cssClass: 'alert-warning position-fixed', timeout: 2000});
-
       }
       else if(comment.upvote.includes(userId)){
         console.log("upvotes contain already ");
         this.success = false;
         this.serverErrorMessages = 'You have already upvoted';
-        // this.flashMessage.show('You have already upvoted', {cssClass: 'alert-warning position-fixed', timeout: 2000});
-        // doc.upvote.push(user_id);
       }
       else if(comment.downvote.includes(userId)){
         console.log("downvotes contain already ");
         this.success = false;
         this.serverErrorMessages = 'You have already downvoted';
-        // this.flashMessage.show('You have already downvoted', {cssClass: 'alert-warning position-fixed', timeout: 2000});
-        // doc.upvote.push(user_id);
       }
       else {
         this.userService.downvoteComment(comment,userId).subscribe(data => {
@@ -152,8 +133,6 @@ export class CommentComponent implements OnInit {
           comment.downvote.push(userId)
           this.success = true;
           this.serverErrorMessages = 'Comment downvoted successfully';
-          // this.flashMessage.show('Comment downvoted successfully', {cssClass: 'alert-success position-fixed', timeout: 2000});
-          // this.router.navigate(['/']);
         })
       }
 

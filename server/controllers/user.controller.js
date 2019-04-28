@@ -77,7 +77,6 @@ module.exports.upvoteComment = (req, res, next) => {
     var id = req.params.comment_id;
     var user_id = req.body.id;
     Comment.findOne({_id:id}).then(function (doc){
-        // console.log("results are ",doc);
         console.log("upvote api called ",doc);
         if(!doc.upvote){
             doc.upvote = [user_id];
@@ -97,7 +96,7 @@ module.exports.upvoteComment = (req, res, next) => {
             if(err){
                 res.redirect("back");
             } else{
-                res.status(200).json({staus: true});
+                res.status(200).json({staus: true,res:updatedComment});
             }
         });
     })
@@ -127,7 +126,7 @@ module.exports.downvoteComment = (req, res, next) => {
             if(err){
                 res.redirect("back");
             } else{
-                res.status(200).json({staus: true});
+                res.status(200).json({staus: true,res:updatedComment});
             }
         });
     })
