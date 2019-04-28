@@ -2,6 +2,12 @@
 A fullstack project for posting comments and some other functionalities like - Login, Signup, Upvoting and Downvoting.
 
 ## How to run the project
+#### Requirements
+NPM, 
+Node, 
+Angular 6, 
+MongoDB
+
 #### Folow the below steps-
 Step 1. Open the terminal and git clone the repository. <br>
 Step 2. Now cd rentomojo-assignment/Angular6<br>
@@ -23,3 +29,5 @@ Angular6, Node.js, Express, MongoDB, Bootstrap v4, Html,CSS,Javascript,GIT
 
 ### Screenshots
 
+![beforelogin](https://user-images.githubusercontent.com/19622657/56861993-0763d380-69c4-11e9-982e-74638b29c479.JPG) <br><br><br>
+![signin](https://user-images.githubusercontent.com/19622657/56862002-134f9580-69c4-11e9-82d5-92b7b05bcb2e.JPG)
